@@ -42,7 +42,7 @@ public class BarCodeUtils {
 
     public static void main(String[] args) {
         String msg = "aaaaa";
-        String path = "D:\\barcode.jpg";
+        String path = "D:\\data\\barcode.jpg";
         BarCodeUtils.getBarCode(msg,path);
     }
 }

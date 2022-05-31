@@ -114,7 +114,7 @@ public class GoogleBarCodeUtils {
 
     public static void main(String[] args) throws IOException {
         BufferedImage image = insertWords(getBarCode("%NN118QL15504441076311812826"), "NN118QL15504441076311812826");
-        ImageIO.write(image, "jpg", new File("d:\\barcode.jpg"));
+        ImageIO.write(image, "jpg", new File("d:\\data\\barcode.jpg"));
 
         // HttpServletResponse response;
         // response.setHeader("Cache-Control", "no-store, no-cache");

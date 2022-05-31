@@ -77,20 +77,20 @@ public class EPL2PDF {
     }
 
     public static void main(String[] args){
-        File file = new File("D:\\phpstudy_pro\\WWW\\Shipment-Label-1-51937.epl");
+        File file = new File("D:\\data\\test.epl");
         List<WordsVo> list =  getWordsVo(file);
         try {
             /**
              * 得到图片缓冲区
              * INT精确度达到一定,RGB三原色，高度280,宽度360
              */
-            BufferedImage bi = new BufferedImage(822, 820, BufferedImage.TYPE_BYTE_GRAY);
+            BufferedImage bi = new BufferedImage(822, 780, BufferedImage.TYPE_BYTE_GRAY);
 
             //得到它的绘制环境(这张图片的笔)
             Graphics2D g2 = (Graphics2D) bi.getGraphics();
 
             //填充一个矩形 左上角坐标(0,0),宽70,高150;填充整张图片
-            g2.fillRect(0, 0, 822, 820);
+            g2.fillRect(0, 0, 822, 780);
             //设置颜色
             g2.setColor(Color.white);
             //填充整张图片(其实就是设置背景颜色)
@@ -104,16 +104,16 @@ public class EPL2PDF {
                 if("A".equals(wordsVo.getType())){
                     if(wordsVo.getFontSize() == 1){
                         //设置字体:字体、字号、大小
-                        g2.setFont(new Font("微软雅黑", Font.BOLD, 13));
+                        g2.setFont(new Font("微软雅黑", Font.PLAIN, 15));
                     }else if(wordsVo.getFontSize() == 4){
                         //设置字体:字体、字号、大小
-                        g2.setFont(new Font("微软雅黑", Font.BOLD, 5 * wordsVo.getFontSize() * wordsVo.getWide()));
+                        g2.setFont(new Font("微软雅黑", Font.BOLD, 17 * wordsVo.getHeight()));
                     }
                     if(wordsVo.getRotation() == 0) {
-                        g2.drawString(wordsVo.getData(), wordsVo.getX() + 3, wordsVo.getY() + wordsVo.getHeight() * 20);
+                        g2.drawString(wordsVo.getData(), wordsVo.getX() + 5, wordsVo.getY() + wordsVo.getHeight() * 16);
                     }else if(wordsVo.getRotation() == 1){
                         g2.rotate((Math.PI/2),wordsVo.getX(), wordsVo.getY());//旋转
-                        g2.drawString(wordsVo.getData(), wordsVo.getX() , wordsVo.getY() + 12);
+                        g2.drawString(wordsVo.getData(), wordsVo.getX() , wordsVo.getY() + 10);
                         g2.rotate(-(Math.PI/2),wordsVo.getX(), wordsVo.getY());//旋转
                     }
                     //画线
@@ -122,14 +122,14 @@ public class EPL2PDF {
                     g2.drawRect(wordsVo.getX(), wordsVo.getY(), wordsVo.getWide(), wordsVo.getHeight());
                 }else if("B".equals(wordsVo.getType())){
                     //画条码
-                    BufferedImage image = GoogleBarCodeUtils.insertWords(GoogleBarCodeUtils.
-                            getBarCode(wordsVo.getData()), wordsVo.getData().replaceAll("\\%",""));
+                    BufferedImage image =GoogleBarCodeUtils.insertWords(GoogleBarCodeUtils.
+                            getBarCode(wordsVo.getData()),wordsVo.getData().replaceAll("\\%",""));
 //                    ImageIO.write(image, "jpg", new File("d:\\barcode.jpg"));
                     g2.drawImage(image, wordsVo.getX(), wordsVo.getY(), null);
                 }
             }
             //保存图片 JPEG表示保存格式
-            ImageIO.write(bi, "JPEG", new FileOutputStream("d:\\b.jpg"));
+            ImageIO.write(bi, "JPEG", new FileOutputStream("d:\\data\\b.jpg"));
 
             System.out.println("成功！");
         }catch (Exception e) {

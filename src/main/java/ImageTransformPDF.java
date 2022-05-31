@@ -90,7 +90,7 @@ public class ImageTransformPDF {
     }
 
     public static void main(String[] args) {
-        ImageTransformPDF.imgOfPdf("d:\\aaa.pdf","d:\\b.jpg");
+        ImageTransformPDF.imgOfPdf("d:\\data\\aaa.pdf","d:\\data\\b.jpg");
     }
 }
 
